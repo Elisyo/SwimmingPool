@@ -9,12 +9,8 @@ public class MockResourcePool extends ResourcePool<MockResource>{
 	@Override
 	protected MockResource createResource() {
 		// TODO Auto-generated method stub
-		return newMockResource();
+		return new MockResource();
 	}
 
-	private MockResource newMockResource() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 }

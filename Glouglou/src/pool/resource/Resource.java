@@ -1,3 +1,4 @@
+package pool.resource;
 
 public interface Resource {
 	

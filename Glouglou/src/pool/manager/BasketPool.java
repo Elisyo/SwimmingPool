@@ -1,3 +1,6 @@
+package pool.manager;
+
+import pool.resource.Basket;
 
 /**
  * @author Loic

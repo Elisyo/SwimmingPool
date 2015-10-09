@@ -1,3 +1,6 @@
+package pool.manager;
+
+import pool.resource.MockResource;
 
 public class MockResourcePool extends ResourcePool<MockResource>{
 

@@ -1,4 +1,7 @@
+package pool.manager;
 import java.util.ArrayList;
+
+import pool.resource.Resource;
 
 
 public abstract class ResourcePool <R extends Resource> {

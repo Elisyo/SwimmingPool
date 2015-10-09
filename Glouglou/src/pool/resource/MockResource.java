@@ -1,3 +1,4 @@
+package pool.resource;
 
 public class MockResource implements Resource{
 

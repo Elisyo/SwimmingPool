@@ -18,12 +18,13 @@ public abstract class ResourcePool <R extends Resource> {
 	}
 	
 	public R provideResource(){
+		R r = null;
 		if(hasAvailableResource()){
-			R r = poolFree.get(0);
+			r = poolFree.get(0);
 			poolFree.remove(0);
 			poolUsed.remove(0);
 		}
-		return null;
+		return r;
 	}
 	
 	private boolean hasAvailableResource() {

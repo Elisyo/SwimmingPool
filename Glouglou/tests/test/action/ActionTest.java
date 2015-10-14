@@ -1,4 +1,4 @@
-package test;
+package test.action;
 
 public abstract class ActionTest {
 

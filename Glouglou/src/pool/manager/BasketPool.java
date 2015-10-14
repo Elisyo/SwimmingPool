@@ -9,7 +9,7 @@ import pool.resource.Basket;
 public class BasketPool extends ResourcePool<Basket>{
 
 	/**
-	 * @param pool size
+	 * @param pool size = number of baskets
 	 */
 	public BasketPool(int n){
 		super(n);

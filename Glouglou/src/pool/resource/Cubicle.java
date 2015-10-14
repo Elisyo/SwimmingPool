@@ -2,9 +2,9 @@ package pool.resource;
 
 /**
  * @author loic
- * The resource of the basketPool
+ * The resource of the CubiclePool
  */
-public class Basket implements Resource {
+public class Cubicle implements Resource {
 
 	public String description() {
 		return null;

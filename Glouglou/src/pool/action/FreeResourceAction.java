@@ -1,5 +1,7 @@
 package pool.action;
 
-public class FreeResourceAction {
+import pool.resource.Resource;
+
+public class FreeResourceAction <R extends Resource> extends ResourcePoolAction<Resource>{
 
 }

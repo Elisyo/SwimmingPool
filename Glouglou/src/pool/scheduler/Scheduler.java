@@ -8,6 +8,7 @@ import pool.exception.ActionFinishedException;
 /**
  * @author loic
  * A simple scheduler of actions
+ * A scheduler is an action
  */
 public abstract class Scheduler extends Action{
 	

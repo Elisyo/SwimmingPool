@@ -6,8 +6,11 @@ package pool.resource;
  */
 public class Basket implements Resource {
 
+	@Override
 	public String description() {
-		return null;
+		return "basket";
 	}
+
+
 
 }

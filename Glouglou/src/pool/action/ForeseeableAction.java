@@ -5,10 +5,15 @@ public class ForeseeableAction extends Action{
 	protected int totalTime;
 	protected int timeRemaining;
 	
-	public ForeseeableAction(String name){
+	public ForeseeableAction(String name,int nbSteps){
 		this.name = name;
+		this.totalTime=nbSteps;
 	}
 	
+	public ForeseeableAction(int nbSteps) {
+		this.totalTime=nbSteps;
+	}
+
 	@Override
 	public boolean isReady(){
 		return totalTime==timeRemaining;

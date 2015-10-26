@@ -1,7 +1,5 @@
 package pool.action;
 
-import java.util.ArrayList;
-import java.util.List;
 
 import pool.exception.ActionFinishedException;
 
@@ -32,10 +30,6 @@ public abstract class Action {
 
 	}
 	
-	/**
-	 * the list of actions
-	 */
-	protected List<ForeseeableAction> listActions = new ArrayList<>();
 	
 	/*
 	 * ======================================== ABSTRACT ===================================

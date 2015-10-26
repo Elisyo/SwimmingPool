@@ -22,11 +22,11 @@ public class Pool {
 		s.addAction(new Swimmer("Alexis",baskets,cubicles,6,5,7));
 		
 		int nbSteps=0;
-		//while(nbSteps!=15){
 		while(!s.isFinished()){
 			nbSteps++;
 			s.doStep();
 		}
+		
 		System.out.println("Finished in "+nbSteps+" steps.");
 	}
 }

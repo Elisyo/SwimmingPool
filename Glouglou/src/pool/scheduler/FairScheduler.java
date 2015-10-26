@@ -1,28 +1,31 @@
 package pool.scheduler;
 
 
+import java.util.Iterator;
 import pool.action.Action;
 
 public class FairScheduler extends Scheduler{
 
-	int index = 0;
+	protected Iterator<Action> iterator;
+
 
 	@Override
 	public Action getNextAction() {
-
-		Action a = actions.get(index);
-		
-		while(a.isFinished()){
-			index++;
-			a = actions.get(index);
+	
+		if(this.iterator == null) {
+			this.iterator = actions.iterator();
 		}
-			
-		if(index == actions.size() -1)
-			index = 0;
-		else	
-			index++;
 		
-		return a;
+		if(!this.iterator.hasNext()) {
+			this.iterator = actions.iterator();
+		}
+		return iterator.next();
+	}
+
+	@Override
+	protected void removeFinishedAction() {
+		this.iterator.remove();
+		
 	}	
 
 }

@@ -15,8 +15,8 @@ import pool.exception.ActionFinishedException;
 public abstract class Scheduler extends Action{
 	
 	protected List<Action> actions = new ArrayList<Action>();
-	protected boolean isReady;
-	protected boolean isInitialized;
+	protected boolean isReady=true;
+	protected boolean isInitialized=true;
 
 	@Override
 	protected boolean isInProgress(){
@@ -25,7 +25,7 @@ public abstract class Scheduler extends Action{
 	
 	@Override
 	public boolean isReady() {
-		return (isReady() && isInitialized());
+		return (isReady && isInitialized());
 	}
 	@Override
 	public boolean isInitialized() {
@@ -40,7 +40,7 @@ public abstract class Scheduler extends Action{
 	
 	@Override
 	public boolean isFinished() {
-		return(getActions().isEmpty() && !(isReady)&&(isInitialized()));
+		return(actions.isEmpty() && !(isReady())&&(isInitialized()));
 	}
 	
 	@Override
@@ -52,7 +52,7 @@ public abstract class Scheduler extends Action{
 			e.printStackTrace();
 		}
 		if(nextAction.isFinished())
-			removeFinishedAction(nextAction);
+			removeFinishedAction();
 		
 	}
 	
@@ -78,17 +78,16 @@ public abstract class Scheduler extends Action{
 		return this.actions;
 	}
 	
-	/**
-	 * Remove of the list the action which are finished
-	 */
-	protected void removeFinishedAction(Action a){
-		this.actions.remove(a);
-	}
+	
 	
 	/*
 	 * ======================================== ABSTRACT ===================================
 	 */
 
+	/**
+	 * Remove of the list the action which are finished
+	 */
+	protected abstract void removeFinishedAction();
 	
 	
 	/**

@@ -1,6 +1,8 @@
 package pool.scheduler;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import pool.action.Action;
 import pool.exception.ActionFinishedException;
@@ -12,9 +14,10 @@ import pool.exception.ActionFinishedException;
  */
 public abstract class Scheduler extends Action{
 	
+	protected List<Action> actions = new ArrayList<Action>();
 	protected boolean isReady;
 	protected boolean isInitialized;
-	
+
 	@Override
 	protected boolean isInProgress(){
 		return isInitialized() && super.isInProgress();
@@ -37,7 +40,7 @@ public abstract class Scheduler extends Action{
 	
 	@Override
 	public boolean isFinished() {
-		return(getAction().isEmpty() && !(isReady)&&(isInitialized()));
+		return(getActions().isEmpty() && !(isReady)&&(isInitialized()));
 	}
 	
 	@Override
@@ -49,33 +52,50 @@ public abstract class Scheduler extends Action{
 			e.printStackTrace();
 		}
 		if(nextAction.isFinished())
-			removeFinishedAction();
+			removeFinishedAction(nextAction);
 		
 	}
-	
-	/*
-	 * ======================================== ABSTRACT ===================================
-	 */
 	
 	/**
 	 * Add an action to list of actions
 	 * @param action
 	 */
-	protected abstract void addAction(Action action);
+	public void addAction(Action action) throws ActionFinishedException {
+		if(this.isFinished()) {
+			throw new ActionFinishedException("Sorry it's too late to add actions at this scheduler !");
+		}
+		
+		if(this.isInProgress()) {
+			throw new ActionFinishedException("Sorry this scheduler is actually in progress then you can't add an action");
+		}		
+		this.actions.add(action);	
+	}
+	
+	/**
+	 * @return the list of actions
+	 */
+	protected Collection<Action> getActions(){
+		return this.actions;
+	}
 	
 	/**
 	 * Remove of the list the action which are finished
 	 */
-	protected abstract void removeFinishedAction();
+	protected void removeFinishedAction(Action a){
+		this.actions.remove(a);
+	}
+	
+	/*
+	 * ======================================== ABSTRACT ===================================
+	 */
+
+	
 	
 	/**
 	 * @return the next action of the list
 	 */
 	protected abstract Action getNextAction();
 	
-	/**
-	 * @return the list of actions
-	 */
-	protected abstract Collection<Action> getAction();
+	
 	
 }

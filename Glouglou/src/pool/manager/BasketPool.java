@@ -13,6 +13,7 @@ public class BasketPool extends ResourcePool<Basket>{
 	 */
 	public BasketPool(int n){
 		super(n);
+		this.poolType="basket";
 	}
 
 	@Override

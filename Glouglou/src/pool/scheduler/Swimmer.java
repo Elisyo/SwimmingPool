@@ -3,6 +3,7 @@ package pool.scheduler;
 import pool.action.ForeseeableAction;
 import pool.action.FreeResourceAction;
 import pool.action.TakeResourceAction;
+import pool.exception.ActionFinishedException;
 import pool.manager.BasketPool;
 import pool.manager.CubiclePool;
 import pool.manager.ResourcefulUser;
@@ -17,7 +18,6 @@ public class Swimmer extends SequentialScheduler{
 
 	private ResourcefulUser<Basket> basketUser ;
 	private ResourcefulUser<Cubicle> cubicleUser;
-	private String name;
 
 	/**
 	 * Create all the actions with the time
@@ -27,12 +27,13 @@ public class Swimmer extends SequentialScheduler{
 	 * @param undressingTime
 	 * @param swimmingTime
 	 * @param dressingTime
+	 * @throws ActionFinishedException 
 	 */
-	public Swimmer(String name, BasketPool basketPool, CubiclePool cubiclePool,int undressingTime, int swimmingTime, int dressingTime) {
+	public Swimmer(String name, BasketPool basketPool, CubiclePool cubiclePool,int undressingTime, int swimmingTime, int dressingTime) throws ActionFinishedException {
 		this.name=name;
 		//initialize resourcefulUser
-		this.basketUser=new ResourcefulUser<Basket>();
-		this.cubicleUser=new ResourcefulUser<Cubicle>();
+		this.basketUser=new ResourcefulUser<Basket>(name);
+		this.cubicleUser=new ResourcefulUser<Cubicle>(name);
 		//initialize the actions
 		initializeActions(basketPool, cubiclePool, undressingTime, swimmingTime, dressingTime);
 
@@ -46,8 +47,9 @@ public class Swimmer extends SequentialScheduler{
 	 * @param undressingTime
 	 * @param swimmingTime
 	 * @param dressingTime
+	 * @throws ActionFinishedException 
 	 */
-	private void initializeActions(BasketPool basketPool, CubiclePool cubiclePool, int undressingTime, int swimmingTime, int dressingTime) {
+	private void initializeActions(BasketPool basketPool, CubiclePool cubiclePool, int undressingTime, int swimmingTime, int dressingTime) throws ActionFinishedException {
 		this.addAction(new TakeResourceAction<Basket>(basketPool, basketUser));
 		this.addAction(new TakeResourceAction<Cubicle>(cubiclePool, cubicleUser));
 		this.addAction(new ForeseeableAction("undressing",undressingTime));
@@ -56,23 +58,7 @@ public class Swimmer extends SequentialScheduler{
 		this.addAction(new TakeResourceAction<Cubicle>(cubiclePool, cubicleUser));
 		this.addAction(new ForeseeableAction("dressing",dressingTime));
 		this.addAction(new FreeResourceAction<Cubicle>(cubiclePool, cubicleUser));
-		this.addAction(new FreeResourceAction<Basket>(basketPool, basketUser));
-		
-	
-	}
-
-	/**
-	 * @return the name of the swimmer
-	 */
-	public String getName() {
-		return name;
-	}
-
-	/**
-	 * @param name of the swimmer
-	 */
-	public void setName(String name) {
-		this.name = name;
+		this.addAction(new FreeResourceAction<Basket>(basketPool, basketUser));	
 	}
 
 }

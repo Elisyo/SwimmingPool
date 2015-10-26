@@ -8,10 +8,11 @@ public class ForeseeableAction extends Action{
 	public ForeseeableAction(String name,int nbSteps){
 		this.name = name;
 		this.totalTime=nbSteps;
+		this.timeRemaining=totalTime;
 	}
 	
 	public ForeseeableAction(int nbSteps) {
-		this.totalTime=nbSteps;
+		this(null,nbSteps);
 	}
 
 	@Override
@@ -27,14 +28,22 @@ public class ForeseeableAction extends Action{
 	
 	@Override
 	public void reallyDoStep(){
-		if(!isFinished())
-			timeRemaining--;
+		timeRemaining--;
+		System.out.println(name+" ("+(totalTime-timeRemaining)+"/"+totalTime+")");
 	}
 
 	@Override
 	public boolean isInitialized() {
-		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
+	
+
+	/**
+	 * @return the name of the action
+	 */
+	public String getName() {
+		return name;
+	}
+
 
 }

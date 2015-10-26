@@ -1,33 +1,16 @@
 package pool.scheduler;
 
-import java.util.Collection;
-
 import pool.action.Action;
 
 public class SequentialScheduler extends Scheduler{
 
-	@Override
-	protected void addAction(Action action) {
-		// TODO Auto-generated method stub
-		
-	}
+	protected String name;
 
-	@Override
-	protected void removeFinishedAction() {
-		// TODO Auto-generated method stub
-		
-	}
-
+	int index =0;
 	@Override
 	protected Action getNextAction() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	protected Collection<Action> getAction() {
-		// TODO Auto-generated method stub
-		return null;
+		System.out.println(name+"'s turn");
+		return this.actions.get(0);
 	}
 
 }

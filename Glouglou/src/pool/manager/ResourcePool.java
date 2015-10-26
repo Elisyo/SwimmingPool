@@ -1,14 +1,21 @@
 package pool.manager;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.NoSuchElementException;
 
 import pool.resource.Resource;
 
 
 public abstract class ResourcePool <R extends Resource> {
 
-	private ArrayList<R> poolFree;
-	private ArrayList<R> poolUsed;
-	
+	private List<R> poolFree;
+	private List<R> poolUsed;
+	protected String poolType;
+
+	/**
+	 * Add the n resources to the poolFree
+	 * @param n : number of resources
+	 */
 	public ResourcePool(int n){
 		this.poolFree= new ArrayList<R>(n);
 		this.poolUsed = new ArrayList<R>(n);
@@ -17,24 +24,16 @@ public abstract class ResourcePool <R extends Resource> {
 		}
 	}
 	
-	public R provideResource(){
-		R r = null;
-		if(hasAvailableResource()){
-			r = poolFree.get(0);
-			poolFree.remove(0);
-			poolUsed.remove(0);
+	public R provideResource()throws NoSuchElementException{
+		if(this.poolFree.isEmpty()){
+			throw new NoSuchElementException("No ressource available");
 		}
+		R r = poolFree.get(0);
+		poolFree.remove(0);
+		poolUsed.add(r);
 		return r;
 	}
 	
-	private boolean hasAvailableResource() {
-		// TODO Auto-generated method stub
-		if(this.poolFree.get(0)== null){
-			return false;
-		}else{
-			return true;
-		}
-	}
 
 	public void freeResource(R r){
 		int indexResourceUsed=this.poolUsed.indexOf(r);
@@ -46,6 +45,16 @@ public abstract class ResourcePool <R extends Resource> {
 		}
 	}
 	
+	/**
+	 * @return the type of the pool
+	 */
+	public String getPoolType() {
+		return poolType;
+	}
+	
+	/**
+	 * @return a new resource Cubicle/Basket
+	 */
 	protected abstract R createResource();
 	
 }

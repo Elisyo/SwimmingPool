@@ -1,5 +1,9 @@
 package pool.exception;
 
+/**
+ * @author Loïc
+ * This exception is launched when someone try to do step when the action is already finished
+ */
 public class ActionFinishedException extends Exception{
 
 

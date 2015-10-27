@@ -6,7 +6,12 @@ import pool.manager.CubiclePool;
 import pool.scheduler.FairScheduler;
 import pool.scheduler.Swimmer;
 
-public class Pool {
+/**
+ * @author Loïc
+ * Launcher of the application
+ * Initialize the fair scheduler, the actions' steps, pools
+ */
+public class Main {
 
 	public static void main(String[]args) throws ActionFinishedException{
 		BasketPool baskets = new BasketPool(6);

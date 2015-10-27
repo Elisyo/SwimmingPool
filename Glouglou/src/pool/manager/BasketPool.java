@@ -13,13 +13,13 @@ public class BasketPool extends ResourcePool<Basket>{
 	 */
 	public BasketPool(int n){
 		super(n);
-		this.poolType="basket";
 	}
 
 	@Override
 	protected Basket createResource() {
-		// TODO Auto-generated method stub
-		return new Basket();
+		Basket basket=new Basket();
+		this.poolType=basket.description();
+		return basket;
 	}
 	
 }

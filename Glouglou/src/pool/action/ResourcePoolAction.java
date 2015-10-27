@@ -3,6 +3,11 @@ package pool.action;
 
 import pool.resource.Resource;
 
+/**
+ * @author Loïc
+ * Abstract class to manage the actions states
+ * @param <R> resource
+ */
 public abstract class ResourcePoolAction<R extends Resource> extends Action {
 
 	protected boolean isReady;

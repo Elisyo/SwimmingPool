@@ -1,18 +1,30 @@
 package pool.action;
 
+/**
+ * @author Loïc
+ * Action which need steps to be finished
+ * Display each step 
+ */
 public class ForeseeableAction extends Action{
 	protected String name;
 	protected int totalTime;
 	protected int timeRemaining;
 	
+	/**
+	 * @param name of the action
+	 * @param nbSteps of the action
+	 */
 	public ForeseeableAction(String name,int nbSteps){
 		this.name = name;
 		this.totalTime=nbSteps;
 		this.timeRemaining=totalTime;
 	}
 	
+	/**
+	 * @param nbSteps
+	 */
 	public ForeseeableAction(int nbSteps) {
-		this(null,nbSteps);
+		this("unknown action",nbSteps);
 	}
 
 	@Override

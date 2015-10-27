@@ -4,12 +4,21 @@ import pool.manager.ResourcePool;
 import pool.manager.ResourcefulUser;
 import pool.resource.Resource;
 
+/**
+ * @author Loïc
+ * When a user has finished a TakeResourceAction, he has to free it
+ * @param <R> ressource
+ */
 public class FreeResourceAction <R extends Resource> extends ResourcePoolAction<Resource>{
 
 	private ResourcePool<R> resources;
 	private ResourcefulUser<R> user;
 	
 	
+	/**
+	 * @param pool
+	 * @param user
+	 */
 	public FreeResourceAction (ResourcePool<R> pool, ResourcefulUser<R> user){
 		this.resources=pool;
 		this.user=user;

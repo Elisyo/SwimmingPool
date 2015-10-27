@@ -4,6 +4,10 @@ package pool.scheduler;
 import java.util.Iterator;
 import pool.action.Action;
 
+/**
+ * @author Loïc
+ * Scheduler which iterates on the list of actions
+ */
 public class FairScheduler extends Scheduler{
 
 	protected Iterator<Action> iterator;

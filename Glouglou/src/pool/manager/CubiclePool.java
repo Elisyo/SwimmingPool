@@ -12,12 +12,13 @@ public class CubiclePool extends ResourcePool<Cubicle>{
 	 */
 	public CubiclePool(int n){
 		super(n);
-		this.poolType="cubicle";
 	}
 
 	@Override
 	protected Cubicle createResource() {
-		return new Cubicle();
+		Cubicle cubicle= new Cubicle();
+		this.poolType=cubicle.description();
+		return cubicle;
 	}
 }
 

@@ -1,7 +1,50 @@
 package test.resource;
 
+import static org.junit.Assert.*;
+
+import java.util.ArrayList;
+
+import org.junit.Test;
+
+import pool.action.ResourcePoolAction;
+import pool.exception.ActionFinishedException;
+import pool.manager.ResourcePool;
+import pool.manager.ResourcefulUser;
 import test.manager.ResourcePoolActionTest;
 
 public class TakeResourceActionTest extends ResourcePoolActionTest{
+
+	@Override
+	protected ResourcePoolAction<MockResource> createAction(
+			ResourcePool<MockResource> pool, ResourcefulUser<MockResource> user) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	@Test
+	public void testWaitingResource() throws ActionFinishedException{
+		ResourcePoolAction<MockResource> r = (ResourcePoolAction<MockResource>) createAction();
+		ArrayList<MockResource> allResources = new ArrayList<MockResource>(n);
+		for(int i = 0;i<n;i++){
+			allResources.add(pool.provideResource());
+		}
+		
+		assertTrue(r.isReady());
+		assertFalse(r.isFinished());
+		
+		r.doStep();
+		assertFalse(r.isReady());
+		assertFalse(r.isFinished());
+		
+		r.doStep();
+		assertFalse(r.isReady());
+		assertFalse(r.isFinished());
+		
+		pool.freeResource(allResources.get(0));
+		
+		r.doStep();
+		assertFalse(r.isReady());
+		assertTrue(r.isFinished());
+	}
 
 }

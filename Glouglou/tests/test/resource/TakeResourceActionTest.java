@@ -7,9 +7,11 @@ import java.util.ArrayList;
 import org.junit.Test;
 
 import pool.action.ResourcePoolAction;
+import pool.action.TakeResourceAction;
 import pool.exception.ActionFinishedException;
 import pool.manager.ResourcePool;
 import pool.manager.ResourcefulUser;
+import pool.resource.Resource;
 import test.manager.ResourcePoolActionTest;
 
 public class TakeResourceActionTest extends ResourcePoolActionTest{
@@ -18,7 +20,8 @@ public class TakeResourceActionTest extends ResourcePoolActionTest{
 	protected ResourcePoolAction<MockResource> createAction(
 			ResourcePool<MockResource> pool, ResourcefulUser<MockResource> user) {
 		// TODO Auto-generated method stub
-		return null;
+		ResourcePoolAction r = new TakeResourceAction<MockResource>(pool, user);
+		return r;
 	}
 	
 	@Test

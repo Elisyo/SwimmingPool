@@ -12,7 +12,7 @@ public abstract class ResourcePoolActionTest extends ActionTest {
 
 	protected int n = 2;
 	protected MockResourcePool pool = new MockResourcePool(n);
-	ResourcefulUser<MockResource> user = new ResourcefulUser<MockResource>(
+	protected ResourcefulUser<MockResource> user = new ResourcefulUser<MockResource>(
 			"user");
 
 	@Override

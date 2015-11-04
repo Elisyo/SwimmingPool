@@ -19,9 +19,7 @@ public class FreeResourceTest extends ResourcePoolActionTest{
 	@Override
 	protected ResourcePoolAction<MockResource> createAction(
 			ResourcePool<MockResource> pool, ResourcefulUser<MockResource> user) {
-		// TODO Auto-generated method stub
-		ResourcePoolAction r = new FreeResourceAction<MockResource>(pool, user);
-		return r;
+		return new FreeResourceAction<MockResource>(pool, user);
 	}
 	
 	@Test

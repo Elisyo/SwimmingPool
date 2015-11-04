@@ -1,6 +1,5 @@
 package test.manager;
 
-import pool.action.Action;
 import pool.action.ResourcePoolAction;
 import pool.manager.ResourcePool;
 import pool.manager.ResourcefulUser;
@@ -16,7 +15,7 @@ public abstract class ResourcePoolActionTest extends ActionTest {
 			"user");
 
 	@Override
-	protected Action createAction() {
+	protected ResourcePoolAction<MockResource> createAction() {
 		return createAction(pool, user);
 	}
 

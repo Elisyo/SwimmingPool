@@ -5,6 +5,6 @@ import pool.resource.Resource;
 public class MockResource implements Resource{
 	@Override
 	public String description(){
-		return null;
+		return "mock resource";
 	}
 }

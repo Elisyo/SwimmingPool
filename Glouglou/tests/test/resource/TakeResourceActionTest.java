@@ -19,14 +19,12 @@ public class TakeResourceActionTest extends ResourcePoolActionTest{
 	@Override
 	protected ResourcePoolAction<MockResource> createAction(
 			ResourcePool<MockResource> pool, ResourcefulUser<MockResource> user) {
-		// TODO Auto-generated method stub
-		ResourcePoolAction r = new TakeResourceAction<MockResource>(pool, user);
-		return r;
+		return new TakeResourceAction<MockResource>(pool, user);
 	}
 	
 	@Test
 	public void testWaitingResource() throws ActionFinishedException{
-		ResourcePoolAction<MockResource> r = (ResourcePoolAction<MockResource>) createAction();
+		ResourcePoolAction<MockResource> r = createAction();
 		ArrayList<MockResource> allResources = new ArrayList<MockResource>(n);
 		for(int i = 0;i<n;i++){
 			allResources.add(pool.provideResource());

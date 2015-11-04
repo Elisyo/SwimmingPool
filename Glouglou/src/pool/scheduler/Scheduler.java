@@ -6,6 +6,7 @@ import java.util.List;
 
 import pool.action.Action;
 import pool.exception.ActionFinishedException;
+import pool.exception.SchedulerInProgressException;
 
 /**
  * @author loic
@@ -14,12 +15,12 @@ import pool.exception.ActionFinishedException;
  */
 public abstract class Scheduler extends Action{
 	
-	protected List<Action> actions = new ArrayList<Action>();
+	public List<Action> actions = new ArrayList<Action>();
 	protected boolean isReady=true;
 	protected boolean isInitialized=true;
 
 	@Override
-	protected boolean isInProgress(){
+	public boolean isInProgress(){
 		return isInitialized() && super.isInProgress();
 	}
 	
@@ -59,14 +60,16 @@ public abstract class Scheduler extends Action{
 	/**
 	 * Add an action to list of actions
 	 * @param action
+	 * @throws ActionFinishedException
+	 * @throws SchedulerInProgressException 
 	 */
-	public void addAction(Action action) throws ActionFinishedException {
+	public void addAction(Action action) throws ActionFinishedException, SchedulerInProgressException {
 		if(this.isFinished()) {
 			throw new ActionFinishedException("Sorry it's too late to add actions at this scheduler !");
 		}
 		
 		if(this.isInProgress()) {
-			throw new ActionFinishedException("Sorry this scheduler is actually in progress then you can't add an action");
+			throw new SchedulerInProgressException("Sorry this scheduler is actually in progress then you can't add an action");
 		}		
 		this.actions.add(action);	
 	}
@@ -74,7 +77,7 @@ public abstract class Scheduler extends Action{
 	/**
 	 * @return the list of actions
 	 */
-	protected Collection<Action> getActions(){
+	public Collection<Action> getActions(){
 		return this.actions;
 	}
 	

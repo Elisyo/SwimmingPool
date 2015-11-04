@@ -4,6 +4,7 @@ import pool.action.ForeseeableAction;
 import pool.action.FreeResourceAction;
 import pool.action.TakeResourceAction;
 import pool.exception.ActionFinishedException;
+import pool.exception.SchedulerInProgressException;
 import pool.manager.BasketPool;
 import pool.manager.CubiclePool;
 import pool.manager.ResourcefulUser;
@@ -28,8 +29,9 @@ public class Swimmer extends SequentialScheduler{
 	 * @param swimmingTime
 	 * @param dressingTime
 	 * @throws ActionFinishedException 
+	 * @throws SchedulerInProgressException 
 	 */
-	public Swimmer(String name, BasketPool basketPool, CubiclePool cubiclePool,int undressingTime, int swimmingTime, int dressingTime) throws ActionFinishedException {
+	public Swimmer(String name, BasketPool basketPool, CubiclePool cubiclePool,int undressingTime, int swimmingTime, int dressingTime) throws ActionFinishedException, SchedulerInProgressException {
 		this.name=name;
 		//initialize resourcefulUser
 		this.basketUser=new ResourcefulUser<Basket>(name);
@@ -48,8 +50,9 @@ public class Swimmer extends SequentialScheduler{
 	 * @param swimmingTime
 	 * @param dressingTime
 	 * @throws ActionFinishedException 
+	 * @throws SchedulerInProgressException 
 	 */
-	private void initializeActions(BasketPool basketPool, CubiclePool cubiclePool, int undressingTime, int swimmingTime, int dressingTime) throws ActionFinishedException {
+	private void initializeActions(BasketPool basketPool, CubiclePool cubiclePool, int undressingTime, int swimmingTime, int dressingTime) throws ActionFinishedException, SchedulerInProgressException {
 		this.addAction(new TakeResourceAction<Basket>(basketPool, basketUser));
 		this.addAction(new TakeResourceAction<Cubicle>(cubiclePool, cubicleUser));
 		this.addAction(new ForeseeableAction("undressing",undressingTime));

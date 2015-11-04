@@ -1,6 +1,7 @@
 package pool.main;
 
 import pool.exception.ActionFinishedException;
+import pool.exception.SchedulerInProgressException;
 import pool.manager.BasketPool;
 import pool.manager.CubiclePool;
 import pool.scheduler.FairScheduler;
@@ -13,7 +14,7 @@ import pool.scheduler.Swimmer;
  */
 public class Main {
 
-	public static void main(String[]args) throws ActionFinishedException{
+	public static void main(String[]args) throws ActionFinishedException, SchedulerInProgressException{
 		BasketPool baskets = new BasketPool(6);
 		CubiclePool cubicles = new CubiclePool(3);
 		FairScheduler s = new FairScheduler();

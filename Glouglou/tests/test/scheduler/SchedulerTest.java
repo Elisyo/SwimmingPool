@@ -10,14 +10,14 @@ import pool.exception.ActionFinishedException;
 import pool.exception.SchedulerInProgressException;
 import pool.scheduler.Scheduler;
 import pool.scheduler.SequentialScheduler;
-
+import test.action.ActionTest;
 import test.action.OneStepAction;
 
 /**
  * @author fguilbert
  *
  */
-public class SchedulerTest{
+public class SchedulerTest extends ActionTest{
 	
 	protected Scheduler s;
 	
@@ -60,6 +60,12 @@ public class SchedulerTest{
 		assertTrue(s.isInProgress());
 		s.addAction(sampleAction3);
 		
+	}
+
+	@Override
+	protected Action createAction() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

@@ -33,7 +33,7 @@ public class SequentialSchedulerTest extends SchedulerTest{
 		Action a1 = new OneStepAction();
 		s.addAction(a1);
 		s.doStep();
-		assertTrue(s.isFinished());
+		assertTrue(s.getActions().isEmpty());
 		
 	}
 	

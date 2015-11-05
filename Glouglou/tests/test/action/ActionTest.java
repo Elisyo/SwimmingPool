@@ -15,11 +15,9 @@ public abstract class ActionTest {
 	public void doStepWhileFinishedThrowsException() throws ActionFinishedException{
 		Action action = createAction();
 		while(!action.isFinished()){
-			try{
-				action.doStep();
-			} catch (ActionFinishedException e){
-				fail("Action was not supposed to be finished, we just checked.");
-			}
+			action.doStep();
+			action.doStep();
+			action.doStep();
 		}
 		assertTrue(action.isFinished());
 	}

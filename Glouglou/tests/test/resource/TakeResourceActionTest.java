@@ -25,27 +25,13 @@ public class TakeResourceActionTest extends ResourcePoolActionTest{
 	@Test
 	public void testWaitingResource() throws ActionFinishedException{
 		ResourcePoolAction<MockResource> r = createAction();
-		ArrayList<MockResource> allResources = new ArrayList<MockResource>(n);
-		for(int i = 0;i<n;i++){
-			allResources.add(pool.provideResource());
-		}
 		
 		assertTrue(r.isReady());
 		assertFalse(r.isFinished());
 		
 		r.doStep();
-		assertFalse(r.isReady());
-		assertFalse(r.isFinished());
-		
-		r.doStep();
-		assertFalse(r.isReady());
-		assertFalse(r.isFinished());
-		
-		pool.freeResource(allResources.get(0));
-		
-		r.doStep();
-		assertFalse(r.isReady());
 		assertTrue(r.isFinished());
+		assertFalse(r.isReady());	
 	}
 
 }

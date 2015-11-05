@@ -22,6 +22,8 @@ public abstract class ResourcePoolAction<R extends Resource> extends Action {
 	public ResourcePoolAction(ResourcePool<R> pool, ResourcefulUser<R> user){
 		this.resources=pool;
 		this.user=user;
+		this.isReady = true;
+		this.isFinished = false;
 	}
 	
 

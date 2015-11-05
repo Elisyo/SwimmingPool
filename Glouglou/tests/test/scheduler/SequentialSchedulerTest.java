@@ -32,6 +32,7 @@ public class SequentialSchedulerTest extends SchedulerTest{
 	public void removeFinishedActionTest() throws ActionFinishedException, SchedulerInProgressException{
 		Action a1 = new OneStepAction();
 		s.addAction(a1);
+		assertFalse(s.getActions().isEmpty());
 		s.doStep();
 		assertTrue(s.getActions().isEmpty());
 		

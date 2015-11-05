@@ -2,6 +2,9 @@ package test.resource;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+
+import java.util.NoSuchElementException;
+
 import org.junit.Test;
 
 import pool.action.FreeResourceAction;
@@ -19,17 +22,21 @@ public class FreeResourceTest extends ResourcePoolActionTest{
 			ResourcePool<MockResource> pool, ResourcefulUser<MockResource> user) {
 		
 		user.setResource(new MockResource());
-		FreeResourceAction<MockResource> r = new FreeResourceAction<MockResource>(pool, user);
-		return r;
+		//pool.provideResource();
+		TakeResourceAction<MockResource> r = new TakeResourceAction<MockResource>(pool, user);
+		try {
+			r.doStep();
+		} catch (ActionFinishedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return new FreeResourceAction<MockResource>(pool, user);
 	}
 	
 	@Test
 	public void freeResourceTest() throws ActionFinishedException{
 		ResourcePoolAction<MockResource> free = createAction();
-		ResourcePoolAction<MockResource> take = new TakeResourceAction<MockResource>(pool, user);
 		
-		take.doStep();
-				
 		assertTrue(free.isReady());
 		assertFalse(free.isFinished());
 		
@@ -38,5 +45,7 @@ public class FreeResourceTest extends ResourcePoolActionTest{
 		assertFalse(free.isReady());
 		assertTrue(free.isFinished());
 	}
+	
+	
 
 }

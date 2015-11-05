@@ -1,7 +1,11 @@
 package test.resource;
 
 import static org.junit.Assert.*;
+
+import java.util.NoSuchElementException;
+
 import org.junit.Test;
+
 import pool.action.ResourcePoolAction;
 import pool.action.TakeResourceAction;
 import pool.exception.ActionFinishedException;
@@ -27,6 +31,15 @@ public class TakeResourceActionTest extends ResourcePoolActionTest{
 		r.doStep();
 		assertTrue(r.isFinished());
 		assertFalse(r.isReady());	
+	}
+	
+	@Test(expected = NoSuchElementException.class, timeout = 2000)
+	public void noSuchElementExceptionTest() throws ActionFinishedException{
+		ResourcePool<MockResource> mockpool = pool;
+		
+		mockpool.provideResource();
+		mockpool.provideResource();
+		mockpool.provideResource();
 	}
 
 }

@@ -2,11 +2,7 @@ package test.resource;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-
-import java.util.NoSuchElementException;
-
 import org.junit.Test;
-
 import pool.action.FreeResourceAction;
 import pool.action.ResourcePoolAction;
 import pool.action.TakeResourceAction;
@@ -27,7 +23,6 @@ public class FreeResourceTest extends ResourcePoolActionTest{
 		try {
 			r.doStep();
 		} catch (ActionFinishedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return new FreeResourceAction<MockResource>(pool, user);

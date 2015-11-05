@@ -1,17 +1,12 @@
 package test.resource;
 
 import static org.junit.Assert.*;
-
-import java.util.ArrayList;
-
 import org.junit.Test;
-
 import pool.action.ResourcePoolAction;
 import pool.action.TakeResourceAction;
 import pool.exception.ActionFinishedException;
 import pool.manager.ResourcePool;
 import pool.manager.ResourcefulUser;
-import pool.resource.Resource;
 import test.manager.ResourcePoolActionTest;
 
 public class TakeResourceActionTest extends ResourcePoolActionTest{

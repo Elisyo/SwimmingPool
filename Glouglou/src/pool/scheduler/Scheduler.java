@@ -50,7 +50,7 @@ public abstract class Scheduler extends Action{
 		try {
 			nextAction.doStep();
 		} catch (ActionFinishedException e) {
-			e.printStackTrace();
+			System.out.println("The current action is finished");
 		}
 		if(nextAction.isFinished())
 			removeFinishedAction();

@@ -11,6 +11,7 @@ import pool.action.Action;
 import pool.exception.ActionFinishedException;
 import pool.exception.SchedulerInProgressException;
 import pool.scheduler.FairScheduler;
+import pool.scheduler.Scheduler;
 import test.action.OneStepAction;
 import test.action.TwoStepAction;
 
@@ -66,6 +67,11 @@ public class FairSchedulerTest extends SchedulerTest {
 		s.doStep();
 		s.doStep();
 		assertEquals(a1,s.getNextAction());
+	}
+
+	@Override
+	protected Scheduler createScheduler() {
+		return new FairScheduler();
 	}
 
 }

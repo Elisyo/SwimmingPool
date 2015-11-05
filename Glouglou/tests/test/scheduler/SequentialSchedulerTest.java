@@ -8,6 +8,7 @@ import org.junit.Test;
 import pool.action.Action;
 import pool.exception.ActionFinishedException;
 import pool.exception.SchedulerInProgressException;
+import pool.scheduler.Scheduler;
 import pool.scheduler.SequentialScheduler;
 import test.action.OneStepAction;
 
@@ -50,6 +51,11 @@ public class SequentialSchedulerTest extends SchedulerTest{
 		assertTrue(a2.isFinished());
 		assertTrue(s.getActions().isEmpty());
 		assertTrue(s.isFinished());
+	}
+
+	@Override
+	protected Scheduler createScheduler() {
+		return new SequentialScheduler();
 	}
 	
 }

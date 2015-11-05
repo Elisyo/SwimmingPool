@@ -17,7 +17,7 @@ import test.action.OneStepAction;
  * @author fguilbert
  *
  */
-public class SchedulerTest extends ActionTest{
+public abstract class SchedulerTest extends ActionTest{
 	
 	protected Scheduler s;
 	
@@ -60,8 +60,9 @@ public class SchedulerTest extends ActionTest{
 
 	@Override
 	protected Action createAction() {
-		// TODO Auto-generated method stub
-		return null;
+		return createScheduler();
 	}
+	
+	protected abstract Scheduler createScheduler();
 
 }

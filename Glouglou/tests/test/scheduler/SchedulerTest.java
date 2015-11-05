@@ -13,6 +13,10 @@ import pool.scheduler.SequentialScheduler;
 
 import test.action.OneStepAction;
 
+/**
+ * @author fguilbert
+ *
+ */
 public class SchedulerTest{
 	
 	protected Scheduler s;

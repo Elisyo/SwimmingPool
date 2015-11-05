@@ -5,7 +5,7 @@ import java.util.Iterator;
 import pool.action.Action;
 
 /**
- * @author Loïc
+ * @author Loï¿½c
  * Scheduler which iterates on the list of actions
  */
 public class FairScheduler extends Scheduler{
@@ -27,7 +27,7 @@ public class FairScheduler extends Scheduler{
 	}
 
 	@Override
-	protected void removeFinishedAction() {
+	public void removeFinishedAction() {
 		this.iterator.remove();
 		
 	}	

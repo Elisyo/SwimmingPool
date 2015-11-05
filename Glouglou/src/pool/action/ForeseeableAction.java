@@ -1,7 +1,7 @@
 package pool.action;
 
 /**
- * @author Loïc
+ * @author Loï¿½c
  * Action which need steps to be finished
  * Display each step 
  */
@@ -29,7 +29,7 @@ public class ForeseeableAction extends Action{
 
 	@Override
 	public boolean isReady(){
-		return totalTime==timeRemaining;
+		return isInitialized() && !isFinished();
 	}
 	
 	@Override
@@ -46,7 +46,7 @@ public class ForeseeableAction extends Action{
 
 	@Override
 	public boolean isInitialized() {
-		return true;
+		return totalTime==timeRemaining;
 	}
 	
 

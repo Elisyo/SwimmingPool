@@ -41,7 +41,7 @@ public abstract class Scheduler extends Action{
 	
 	@Override
 	public boolean isFinished() {
-		return(actions.isEmpty() && !(isReady())&&(isInitialized()));
+		return(getActions().isEmpty() && (!isReady())&&(isInitialized()));
 	}
 	
 	@Override

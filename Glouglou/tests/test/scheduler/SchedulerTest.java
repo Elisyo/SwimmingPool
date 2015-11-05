@@ -9,6 +9,7 @@ import pool.action.Action;
 import pool.exception.ActionFinishedException;
 import pool.exception.SchedulerInProgressException;
 import pool.scheduler.Scheduler;
+import pool.scheduler.SequentialScheduler;
 
 import test.action.OneStepAction;
 
@@ -19,7 +20,7 @@ public class SchedulerTest{
 	
 	@Before
 	public void instantiateMockScheduler(){
-		s = new MockScheduler();
+		s = new SequentialScheduler();
 	}
 	
 	@Test
@@ -30,12 +31,15 @@ public class SchedulerTest{
 	}
 	
 	@Test(expected=ActionFinishedException.class)
-	public void addActionToFinishedSchedulerTest()throws ActionFinishedException, SchedulerInProgressException{
+	public void addActionToFinishedSchedulerTest()throws  SchedulerInProgressException, ActionFinishedException{
 		Action sampleAction1 = new OneStepAction();
 		s.addAction(sampleAction1);
-		sampleAction1.doStep();
+		System.out.println("yo");
+		s.doStep();
+		System.out.println("ya");
 		assertTrue(sampleAction1.isFinished());
-		System.out.println(s.actions.get(0).isFinished());
+		System.out.println(sampleAction1.isFinished());
+		System.out.println(s.isFinished());
 		assertTrue(s.isFinished());
 		Action sampleAction2 = new OneStepAction();
 		s.addAction(sampleAction2);
@@ -48,7 +52,7 @@ public class SchedulerTest{
 		Action sampleAction3 = new OneStepAction();
 		s.addAction(sampleAction1);
 		s.addAction(sampleAction2);
-		sampleAction1.doStep();
+		s.doStep();
 		assertTrue(s.isInProgress());
 		s.addAction(sampleAction3);
 		

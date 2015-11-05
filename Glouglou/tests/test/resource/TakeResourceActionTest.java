@@ -23,7 +23,7 @@ public class TakeResourceActionTest extends ResourcePoolActionTest{
 	}
 	
 	@Test
-	public void testWaitingResource() throws ActionFinishedException{
+	public void testTakingResource() throws ActionFinishedException{
 		ResourcePoolAction<MockResource> r = createAction();
 		
 		assertTrue(r.isReady());

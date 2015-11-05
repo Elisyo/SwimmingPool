@@ -30,7 +30,6 @@ public class TakeResourceAction <R extends Resource> extends ResourcePoolAction<
 			user.setResource(resourceType);
 			System.out.println(user.getName()+" trying to take resource from pool "+resources.getPoolType()+"... success");
 			isFinished=true;
-			System.out.println(isFinished);
 			isReady = false;
 		}catch(NoSuchElementException e){	
 			System.out.println(user.getName()+" trying to take resource from pool "+resources.getPoolType()+"... failed");

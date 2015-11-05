@@ -9,6 +9,7 @@ import org.junit.Test;
 
 import pool.action.FreeResourceAction;
 import pool.action.ResourcePoolAction;
+import pool.action.TakeResourceAction;
 import pool.exception.ActionFinishedException;
 import pool.manager.ResourcePool;
 import pool.manager.ResourcefulUser;
@@ -19,27 +20,26 @@ public class FreeResourceTest extends ResourcePoolActionTest{
 	@Override
 	protected ResourcePoolAction<MockResource> createAction(
 			ResourcePool<MockResource> pool, ResourcefulUser<MockResource> user) {
-		return new FreeResourceAction<MockResource>(pool, user);
+		
+		user.setResource(new MockResource());
+		FreeResourceAction<MockResource> r = new FreeResourceAction<MockResource>(pool, user);
+		return r;
 	}
 	
 	@Test
 	public void freeResourceTest() throws ActionFinishedException{
-		ResourcePoolAction<MockResource> r = (ResourcePoolAction<MockResource>) createAction();
-		ArrayList<MockResource> allResources = new ArrayList<MockResource>(n);
-		for(int i = 0;i<n;i++){
-			allResources.add(pool.provideResource());
-		}
+		ResourcePoolAction<MockResource> free = createAction();
+		ResourcePoolAction<MockResource> take = new TakeResourceAction<MockResource>(pool, user);
 		
-		r.doStep();
+		take.doStep();
+				
+		assertTrue(free.isReady());
+		assertFalse(free.isFinished());
 		
-		pool.freeResource(allResources.get(0));
-		allResources.remove(0);
+		free.doStep();
 		
-		r.doStep();
-		pool.freeResource(allResources.get(0));
-		allResources.remove(0);
-		
-		assertTrue(allResources.isEmpty());
+		assertFalse(free.isReady());
+		assertTrue(free.isFinished());
 	}
 
 }

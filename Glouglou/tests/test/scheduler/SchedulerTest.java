@@ -38,12 +38,8 @@ public class SchedulerTest extends ActionTest{
 	public void addActionToFinishedSchedulerTest()throws  SchedulerInProgressException, ActionFinishedException{
 		Action sampleAction1 = new OneStepAction();
 		s.addAction(sampleAction1);
-		System.out.println("yo");
 		s.doStep();
-		System.out.println("ya");
 		assertTrue(sampleAction1.isFinished());
-		System.out.println(sampleAction1.isFinished());
-		System.out.println(s.isFinished());
 		assertTrue(s.isFinished());
 		Action sampleAction2 = new OneStepAction();
 		s.addAction(sampleAction2);
